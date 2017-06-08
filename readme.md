@@ -16,17 +16,18 @@ a. EXE packages
    
 b. Python packages
 
-   I. Please install yagmail before using the package. https://github.com/kootenpv/yagmail
+ * Please install yagmail before using the package. https://github.com/kootenpv/yagmail
    
-      Pip install yagmail[all]
       
-   II. Download the Python scripts into your computer for further usage.
+        Pip install yagmail[all]
+      
+    
+ * Download the Python scripts into your computer for further usage.
    
-   PS: pip installment will be supported in the future. 
    
 ### Configure your parameters
 
-a. Please find your configuration.json file in the exe packages or downloaded Python files.  THe file should look like:
+ Please find your configuration.json file in the exe packages or downloaded Python files.  THe file should look like:
 
     {
       "SendAddress": "youremail@gmail.com",
@@ -58,7 +59,7 @@ a. Please find your configuration.json file in the exe packages or downloaded Py
    |FileType | the type of data files. | 
    |Interval | the interval to send notifications. Unit: second. 600 means that the email will be send every 10 minutes.|
    
-b. After configuration, you are free to push notifications.
+ After configuration, you are free to push notifications.
 
 * if you are using exe file, please double click the exe file.
 * if you are using Python package, please open cmd.exe to add
@@ -69,7 +70,7 @@ b. After configuration, you are free to push notifications.
  
         Send one email! 
 
-c. If it is the first time to use the sending email address, the program will ask you to input the password.  
+If it is the first time to use the sending email address, the program will ask you to input the password.  
 
         Password for <youremailaddress@gmail.com>:
    After your enter the password, it will show:
