@@ -1,11 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed May 24 11:42:02 2017
-
-V0.2 Update :
- - Use yagmail to wrap the email sending scripts.
- - Not saving password in the scripts.
-
 @author: Wenlong Liu 
 wliu14@ncsu.edu
 """
@@ -14,6 +9,9 @@ import glob
 import time
 import os
 import json
+
+from smtplib import SMTPAuthenticationError
+from socket import gaierror
 
 
 def _configuration(filename):
@@ -72,9 +70,21 @@ if __name__ == '__main__':
             send_email(username, username, subject=subject, body=body,
                        attachments=attachments)
 
-            print('Send one email.')
+            print('Send one email.\n')
+
+        except SMTPAuthenticationError:
+            print('Invalid password, please try it again!\n')
+            try:
+                send_email(username, username, subject=subject, body=body,
+                           attachments=attachments)
+                print('Send one email.\n')
+
+            except SMTPAuthenticationError:
+                print('Invalid email or password again. Please close program, login via web browser and try it again .\n')
+                break
+
         except:
-            print('Bad connection, try it again.')
+            print('Bad connection, try it again.\n')
 
         finally:
             time.sleep(interval)
