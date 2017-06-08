@@ -12,11 +12,15 @@ This package is written and tested in Python 3.5.2.
 a. EXE packages
 
    If you would like to run the scripts without coding experiences, please download the pre-wrapped packages and run the scripts using .exe file.
-   Link: https://github.com/wliu2016/sending_email/blob/exe-package/sending_email.zip?raw=true
+   
+   Windows  [64 bit](https://github.com/wliu2016/sending_email/blob/exe-package/sending_email.zip?raw=true)
+   
+   Windows [32 bit (coming soon)]()
+   
    
 b. Python packages
 
- * Please install yagmail before using the package. https://github.com/kootenpv/yagmail
+ * Please install [yagmail](https://github.com/kootenpv/yagmail) before using the package. 
    
       
         Pip install yagmail[all]
@@ -84,7 +88,7 @@ Note: if you are sure your password is correct but fail to log in, please see th
 - Fail to log in your Gmail account.
 
     * If your password is correct but fail to log in, please try to login via web browser. This should solve most problems.
-    * If still not working, you can try to activate _less secure apps_ in your gmail account via https://myaccount.google.com/lesssecureapps?pli=1. 
+    * If still not working, you can try to activate [_less secure apps_](https://myaccount.google.com/lesssecureapps?pli=1) in your gmail account. 
 Warning: Do not do it on your university account or any other important email address as it will decrease the security of your account. 
 
 - What if my email address is not Gmail?
