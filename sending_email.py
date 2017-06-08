@@ -1,84 +1,80 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed May 10 16:32:22 2017
-This scripts are used to send out data from Pasture to Wenlong from field.
+Created on Wed May 24 11:42:02 2017
 
-Key features:
-- Parse and send out all .par files
-- Send out email at certain intervals: such as one day.
-@author: wliu14
+V0.2 Update :
+ - Use yagmail to wrap the email sending scripts.
+ - Not saving password in the scripts.
+
+@author: Wenlong Liu 
+wliu14@ncsu.edu
 """
-
-from email import encoders
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-from email.mime.base import MIMEBase
-
-import smtplib
-import time
+import yagmail
 import glob
+import time
 import os
-import logging
+import json
 
-def _get_files(path):
-    # parse and find out all the files endwith .par.
+
+def _configuration(filename):
+    """
+    Load configuration parameters from existing json file.
+    :param filename: the json file to store parameters.
+    :return: A dictionary with all the parameters.
+    """
+    with open(filename) as configuration:
+        data = json.load(configuration)
+    return data
+
+
+def _get_filename(Path, FileType):
+    """
+    Obtain the specify files in the target folder.
+    :param:
+    -Path: such as 'F:\\'
+    -FileType: file type, such as: .par
+    :return:
+    A list that contains all the names of targeted files in specific paths.
+    """
     files = list()
-
-    for filename in glob.glob(os.path.join(path, '*.par')):
+    for filename in glob.glob(os.path.join(Path, '*' + FileType)):
         files.append(filename)
-
     return files
 
-def send_email(path):
 
-    #information of the email address.
-    from_addr = 'wenlongliu853@gmail.com'
-    email_password = 'XXXX'
-    to_addr = 'wenlongliu853@gmail.com'
+def send_email(username, to, subject, body, attachments):
+    """
+    Wrapper of yagmail to send out emails.
+    """
+    # for the first time user, a popup will be shown to ask for password.
+    yag = yagmail.SMTP(username)
 
-    #send attachment via email.
-    msg = MIMEMultipart()
-    msg['From'] = from_addr
-    msg['To'] = to_addr
-    msg['Subject'] = 'This is a testing email.'
+    yag.send(to=to, subject=subject, contents=[body] + attachments)
 
-    #Attachement information.
-    files = _get_files(path)
-    msg.attach(MIMEText('This is a testing email to send out the Plymouth data', 'plain', 'utf-8'))
-
-    for filename in files:
-    #Adding attachments.
-        with open(filename, 'rb') as f:
-        # Set the name and format of the attachment:
-            mime = MIMEBase('text', 'plain', filename=filename)
-        # Header information:
-            mime.add_header('Content-Disposition', 'attachment', filename=filename)
-            mime.add_header('Content-ID', '<0>')
-            mime.add_header('X-Attachment-Id', '0')
-        # Read in attachment:
-            mime.set_payload(f.read())
-        # Decode the information:
-            encoders.encode_base64(mime)
-        # Add files into attachment.
-            msg.attach(mime)
-
-    smtp_server = 'smtp.gmail.com'
-    smtp_port = 587
-    server = smtplib.SMTP(smtp_server, smtp_port)
-    server.starttls()
-    server.set_debuglevel(1)
-    server.login(from_addr, email_password)
-    server.sendmail(from_addr, to_addr, msg.as_string())
-    server.quit()
 
 if __name__ == '__main__':
-    path = 'C:\\s-canV5.0\\Results\\ORIGINAL'
-    interval = 600 #Unit: second
+    # load configurations from json.
+    config = _configuration('configuration.json')
+    username = config['SendAddress']
+    to = config['ReceiveAddress']
+    subject = config['Subject']
+    body = config['Content']
+    interval = config['Interval']
+    attachment = config['Attachments']
+
     while True:
+        attachments = list()
         try:
-            send_email(path)
-            print('\n Sending one email!\n')
+            for item in attachment:
+                attachments += _get_filename(attachment[item]['Path'],
+                                             attachment[item]['FileType'])
+
+            send_email(username, username, subject=subject, body=body,
+                       attachments=attachments)
+
+            print('Send one email.')
         except:
-            print('\n error, try again later.\n ')
+            print('Bad connection, try it again.')
+
         finally:
             time.sleep(interval)
