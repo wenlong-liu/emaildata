@@ -15,7 +15,7 @@ a. EXE packages
    
    Windows  [64 bit](https://github.com/wliu2016/sending_email/blob/exe-package/sending_email.zip?raw=true)
    
-   Windows [32 bit (coming soon)]()
+   Windows  [32 bit](https://github.com/wliu2016/sending_email/blob/exe-package/sending_email32.zip?raw=true)
    
    
 b. Python packages
