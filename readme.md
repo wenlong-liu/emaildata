@@ -100,4 +100,4 @@ Warning: Do not do it on your university account or any other important email ad
   Close the pop-out windows or just click "CTRL + C"
 
   
-### For more questions, comments or suggestions, please contact Wenlong Liu via wliu14@ncsu.edu
+### For more questions, comments or suggestions, reply in this [Issue](https://github.com/wliu2016/sending_email/issues/2)
