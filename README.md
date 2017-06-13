@@ -1,5 +1,4 @@
 # sending_email
-Retrieve and send out data automatically via emails.
 
 ### This is the prepacked version for sending_email.py.  Please download the respective bit of zip files for 32 bite 64 bite Windows OS. 
 
