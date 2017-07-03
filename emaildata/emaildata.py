@@ -52,7 +52,7 @@ def send_email(username, to, subject, body, attachments):
 
 if __name__ == '__main__':
     # load configurations from json.
-    config = _configuration('configuration.json')
+    config = _configuration('.//resources//configuration.json')
     username = config['SendAddress']
     to = config['ReceiveAddress']
     subject = config['Subject']
@@ -80,7 +80,8 @@ if __name__ == '__main__':
                 print('Send one email.\n')
 
             except SMTPAuthenticationError:
-                print('Invalid email or password again. Please close program, login via web browser and try it again .\n')
+                print("Invalid email or password again!")
+                print("Please close program, login via web browser and try it again .\n")
                 break
 
         except:

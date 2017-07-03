@@ -5,15 +5,9 @@
   "Content": "This email is to update the data measured from Pasture.",
   "Attachments":{
     "Scan":{
-      "Path":"C:\\samples",
-      "FileType":".par"
-    },
-    
-    "Meta":{
-      "Path":"C:\\samples\\file",
-      "FileType":".csv"
+      "Path":"C:\\Users\\wliu14.WOLFTECH\\Documents",
+      "FileType":".hobo"
     }
-
   },
   
   "Interval":600
