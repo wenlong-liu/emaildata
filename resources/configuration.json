@@ -1,12 +1,12 @@
 {
-  "SendAddress": "wenlongliu853@gmail.com",
-  "ReceiveAddress": "wenlongliu853@gmail.com",
-  "Subject": "Data update from Pasture, Plymouth",
-  "Content": "This email is to update the data measured from Pasture.",
+  "SendAddress": "your send email",
+  "ReceiveAddress": "your receive email",
+  "Subject": "Subject of your email",
+  "Content": "Content of your email",
   "Attachments":{
     "Scan":{
-      "Path":"C:\\Users\\wliu14.WOLFTECH\\Documents",
-      "FileType":".hobo"
+      "Path":"XX",
+      "FileType":".XX"
     }
   },
   
