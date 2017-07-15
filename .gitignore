@@ -3,9 +3,8 @@
 Makefile
 conf.py
 make.bat
-
 _build/
 _static/
 _templates/
 examples/
-test/
+/emaildata/configuration.json

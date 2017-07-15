@@ -11,7 +11,6 @@ import os
 import json
 
 from smtplib import SMTPAuthenticationError
-from socket import gaierror
 
 
 def _configuration(filename):
@@ -46,13 +45,21 @@ def send_email(username, to, subject, body, attachments):
     """
     # for the first time user, a popup will be shown to ask for password.
     yag = yagmail.SMTP(username)
+    # Check the types of attachments.
+    if attachments:
+        contents = [body]
+    elif isinstance(attachments,list):
+        contents = [body] + attachments
+    else:
+        raise TypeError("Attachments should be list or None.")
 
     yag.send(to=to, subject=subject, contents=[body] + attachments)
 
 
 if __name__ == '__main__':
     # load configurations from json.
-    config = _configuration('.//resources//configuration.json')
+    config = _configuration('configuration.json')
+
     username = config['SendAddress']
     to = config['ReceiveAddress']
     subject = config['Subject']
@@ -67,7 +74,7 @@ if __name__ == '__main__':
                 attachments += _get_filename(attachment[item]['Path'],
                                              attachment[item]['FileType'])
 
-            send_email(username, username, subject=subject, body=body,
+            send_email(username=username, to=to, subject=subject, body=body,
                        attachments=attachments)
 
             print('Send one email.\n')
@@ -75,7 +82,7 @@ if __name__ == '__main__':
         except SMTPAuthenticationError:
             print('Invalid password, please try it again!\n')
             try:
-                send_email(username, username, subject=subject, body=body,
+                send_email(username, to, subject=subject, body=body,
                            attachments=attachments)
                 print('Send one email.\n')
 
@@ -83,6 +90,9 @@ if __name__ == '__main__':
                 print("Invalid email or password again!")
                 print("Please close program, login via web browser and try it again .\n")
                 break
+
+        except TypeError as e:
+            print(e)
 
         except:
             print('Bad connection, try it again.\n')
